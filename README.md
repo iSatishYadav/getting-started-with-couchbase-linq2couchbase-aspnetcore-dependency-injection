@@ -1,10 +1,10 @@
-﻿# How to get started with CouchBase with ASP.NET Core using Linq2CouchBase AND Dependency Injection
+﻿# How to get started with [Couchbase][Couchbase Home Page] with ASP.NET Core using [Linq2Couchbase][Linq2Couchbase Github Page] AND Dependency Injection
 ## Introduction 
-This totorial will create a sample repo for using CouchBase with ASP.NET Core 3 with Linq2CouchBase AND Dependency Injection.
+This totorial will create a sample repo for using [Couchbase][Couchbase Home Page] with ASP.NET Core 3 with [Linq2Couchbase][Linq2Couchbase Github Page] AND Dependency Injection.
 
 ## How to re-create this repo?
 ### Bucket setup
-Assuming you already have an up and running CouchBase server running. If not, chcek-out official CouchBase docs and come back.
+Assuming you already have an up and running Couchbase server running. If not, chcek-out official Couchbase docs and come back.
 
 Create a new `bucket` named _contacts_ add a few documents like this
 
@@ -19,15 +19,15 @@ Create a new `bucket` named _contacts_ add a few documents like this
 > 
 ### New Peoject
 Create a new Project with ASP.NET Core - Web Application (MVC).
-### Installing CouchBase packages
+### Installing Couchbase packages
 
 Install following nuget packages.
-1.   `CouchbaseNetClient` - CouchBase .NET SDK
-2.   `Couchbase.Extensions.DependencyInjection` - Dependency Injection extensions
-3.   `Linq2Couchbase` - Linq-to-CouchBase provider for accessing database like other ORMs e.g. `EntityFramework`.
-### CouchBase Server Configuration
-#### Keeping CouchBase configuration in ASP.NET Configuration
-Add CouchBase Database Server configuration in `appsettings.json` e.g.
+1.   [`CouchbaseNetClient`][Couchbase SDK Nuget] - Couchbase .NET SDK
+2.   [`Couchbase.Extensions.DependencyInjection`][Couchbase Dependency Injection Nuget] - Dependency Injection extensions
+3.   [`Linq2Couchbase`][Linq2Couchbase Nuget] - Linq-to-Couchbase provider for accessing database like other ORMs e.g. `EntityFramework`.
+### Couchbase Server Configuration
+#### Keeping Couchbase configuration in ASP.NET Configuration
+Add Couchbase Database Server configuration in `appsettings.json` e.g.
 ````JSON
 {
   "Couchbase": {
@@ -42,7 +42,7 @@ Add CouchBase Database Server configuration in `appsettings.json` e.g.
 ````
 > For Production, you may want to set `UseSsl` as `true` depending on your server configuration.
 
-#### CouchBase configuration with ASP.NET Core Dependency Injection
+#### Couchbase configuration with ASP.NET Core Dependency Injection
 Add configuration to `ConfigureServices` method
 ````Csharp
 services.AddCouchbase(Configuration.GetSection("Couchbase"))
@@ -64,8 +64,8 @@ services
     .AddCouchbase(Configuration.GetSection("Couchbase"))
     .AddCouchbaseBucket<IContactsBucketProvider>("contacts");
 ````
-### CouchBase clean-up after application stops
-Add a `IHostApplicationLifetime` parameter to `Configure` method and code to clean-up CouchBase once the application stops, so it looks like this:
+### Couchbase clean-up after application stops
+Add a `IHostApplicationLifetime` parameter to `Configure` method and code to clean-up Couchbase once the application stops, so it looks like this:
 ```CSharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime hostApplicationLifetime)
 {
@@ -76,7 +76,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApp
             });
 }
 ````
-### Context using `Linq2CouchBase`
+### Context using `Linq2Couchbase`
 Register a `BucketContext` to be used for accessging documents from datbase. In `ConfigureServices` method add following:
 
 ````CSharp
@@ -87,8 +87,8 @@ Register a `BucketContext` to be used for accessging documents from datbase. In 
     });
 ````
 
-### POCO classes for accessing CouchBase
-Add a `Contact` class in `Data` folder for accessing CouchBase documents.
+### POCO classes for accessing Couchbase
+Add a `Contact` class in `Data` folder for accessing Couchbase documents.
 ````CSharp
 public class Contact
 {        
@@ -454,3 +454,10 @@ Add `Index`, `Create`, `Edit`, `Details`, and `Delete` views, under `Views`-> `C
 
 ### Run
 Thant's it! Run and your application is ready to be served.
+
+
+[Couchbase Home Page]: https://couchbase.com
+[Linq2Couchbase Github Page]: https://github.com/couchbaselabs/Linq2Couchbase
+[Couchbase SDK Nuget]: https://www.nuget.org/packages/CouchbaseNetClient/
+[Linq2Couchbase Nuget]: https://www.nuget.org/packages/Linq2Couchbase/
+[Couchbase Dependency Injection Nuget]: https://www.nuget.org/packages/Couchbase.Extensions.DependencyInjection/

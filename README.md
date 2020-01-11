@@ -1,6 +1,6 @@
-﻿# Couch Contacts
+﻿# How to get started with CouchBase with ASP.NET Core using Linq2CouchBase AND Dependency Injection
 ## Introduction 
-This is a sample repo for using CouchBase with ASP.NET Core 3 with Linq2CouchBase AND Dependency Injection.
+This totorial will create a sample repo for using CouchBase with ASP.NET Core 3 with Linq2CouchBase AND Dependency Injection.
 
 ## How to re-create this repo?
 ### Bucket setup

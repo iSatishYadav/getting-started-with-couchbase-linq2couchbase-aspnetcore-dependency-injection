@@ -110,7 +110,7 @@ namespace HelloCouch.Controllers
             }
         }
 
-        // GET: Contacts/Delete/5\        
+        // GET: Contacts/Delete/5        
         [HttpGet(Name = "Delete")]
         public ActionResult ConfirmDelete(string id)
         {

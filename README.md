@@ -16,7 +16,7 @@ Create a new `bucket` named _contacts_ add a few documents like this
 }
 ````
 > Since this `bucket` may contain any type of document, an optional property `type` has been added to filter `contact` objects easily.
-> 
+
 ### New Peoject
 Create a new Project with ASP.NET Core - Web Application (MVC).
 ### Installing Couchbase packages
@@ -473,6 +473,18 @@ Add `Index`, `Create`, `Edit`, `Details`, and `Delete` views, under `Views`-> `C
 ### Run
 Thant's it! Run and your application is ready to be served.
 
+### Edit: If you've run into an error
+
+If you've run into an error, which looks something like this:
+
+````CSharp
+CouchbaseQueryException: No index available on keyspace contacts that matches your query. Use CREATE INDEX or CREATE PRIMARY INDEX to create an index, or check that your expected index is online.
+````
+You need to create an index before querying. For simplicity create a `Primary Index` on `type` field with following script.
+
+````SQL
+CREATE PRIMARY INDEX ON contacts
+````
 
 [Couchbase Home Page]: https://couchbase.com
 [Linq2Couchbase Github Page]: https://github.com/couchbaselabs/Linq2Couchbase

@@ -90,11 +90,19 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApp
 Register a `BucketContext` to be used for accessging documents from datbase. In `ConfigureServices` method add following:
 
 ````CSharp
- services.AddTransient(x =>
+public void ConfigureServices(IServiceCollection services)
+{
+    //Other configurations
+    //CouchBase configuration using Dependency Injection
+    services
+      .AddCouchbase(Configuration.GetSection("Couchbase"))
+      .AddCouchbaseBucket<IContactsBucketProvider>("contacts");
+    services.AddTransient(x =>
     {
-        var contactsBucket = x.GetRequiredService<IContactsBucketProvider>();
-        return new BucketContext(contactsBucket.GetBucket());
+      var contactsBucket = x.GetRequiredService<IContactsBucketProvider>();
+      return new BucketContext(contactsBucket.GetBucket());
     });
+}
 ````
 
 ### POCO classes for accessing Couchbase

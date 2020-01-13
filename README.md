@@ -65,9 +65,14 @@ public interface IContactsBucketProvider: INamedBucketProvider
 #### Register bucket provider with Dependency Injection
 Register named bucket provider with `AddCouchbaseBucket` by chaining it to `AddCouchbase` call, so it looks like this:
 ````CSharp
-services
-    .AddCouchbase(Configuration.GetSection("Couchbase"))
-    .AddCouchbaseBucket<IContactsBucketProvider>("contacts");
+public void ConfigureServices(IServiceCollection services)
+{
+    //Other configurations
+    //CouchBase configuration using Dependency Injection
+    services
+      .AddCouchbase(Configuration.GetSection("Couchbase"))
+      .AddCouchbaseBucket<IContactsBucketProvider>("contacts");
+}
 ````
 ### Couchbase clean-up after application stops
 Add a `IHostApplicationLifetime` parameter to `Configure` method and code to clean-up Couchbase once the application stops, so it looks like this:

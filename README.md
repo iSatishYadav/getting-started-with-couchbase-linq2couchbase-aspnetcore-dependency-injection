@@ -45,7 +45,12 @@ Add Couchbase Database Server configuration in `appsettings.json` e.g.
 #### Couchbase configuration with ASP.NET Core Dependency Injection
 Add configuration to `ConfigureServices` method
 ````Csharp
-services.AddCouchbase(Configuration.GetSection("Couchbase"))
+public void ConfigureServices(IServiceCollection services)
+{
+    //Other configurations
+    //CouchBase configuration using Dependency Injection
+    services.AddCouchbase(Configuration.GetSection("Couchbase"));
+}
 ````
 
 ### Accessing buckets

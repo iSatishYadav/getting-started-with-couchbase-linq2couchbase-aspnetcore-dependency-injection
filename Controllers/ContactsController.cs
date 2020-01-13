@@ -66,7 +66,7 @@ namespace HelloCouch.Controllers
             {
                 // TODO: Add insert logic here
                 //contactsModel.Id = Guid.NewGuid().ToString();
-                var contact = new Contact { Name = contactDto.Name, Number = contactDto.Number };
+                var contact = new Contact { Id = Guid.NewGuid().ToString(), Name = contactDto.Name, Number = contactDto.Number };                
                 _bucketContext.Save(contact);
                 return RedirectToAction(nameof(Index));
             }
@@ -95,12 +95,12 @@ namespace HelloCouch.Controllers
         // POST: Contacts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ContactDto contact)
+        public ActionResult Edit(string id, ContactDto contact)
         {
             try
             {
                 // TODO: Add update logic here                
-                _bucketContext.Save(new Contact { Name = contact.Name, Number = contact.Number });
+                _bucketContext.Save(new Contact { Id = id, Name = contact.Name, Number = contact.Number });
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)

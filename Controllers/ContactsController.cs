@@ -110,8 +110,8 @@ namespace HelloCouch.Controllers
             }
         }
 
-        // GET: Contacts/Delete/5        
-        [HttpGet(Name = "Delete")]
+        // GET: Contacts/Delete/5                
+        [ActionName("Delete")]
         public ActionResult ConfirmDelete(string id)
         {
             var contact = _bucketContext
@@ -137,11 +137,14 @@ namespace HelloCouch.Controllers
                 var contact = _bucketContext.Query<Contact>().FirstOrDefault(x => N1QlFunctions.Meta(x).Id == id);
                 if (contact == null)
                     return NotFound();
+                contact.Id = id;
                 _bucketContext.Remove(contact);
+                _bucketContext.SubmitChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
+                ModelState.AddModelError("error", e.Message);
                 return View();
             }
         }
